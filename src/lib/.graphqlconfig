@@ -1,0 +1,17 @@
+{
+  "name": "Untitled GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://countries-graphql3.p.rapidapi.com/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "X-RapidAPI-Key": "c0e8772603msh1eb54161e8a640ap16f3e2jsn3559ba7b08fe",
+          "X-RapidAPI-Host": "countries-graphql3.p.rapidapi.com"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

@@ -1,0 +1,349 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+"Cities in a Subdivision in a Country"
+type City {
+    "Geo Coordinates of the City"
+    coordinates: GeoCoordinates
+    "Country this Country belongs to"
+    country: Country!
+    "Name of the City"
+    name: String!
+    "Name of the City in Unicode escape sequence"
+    nameU: String!
+    "Subdivision this City belongs to"
+    subdivision: Subdivision!
+}
+
+"Continents"
+type Continent {
+    "2-letter code"
+    code: ID!
+    "Countries in the Continent"
+    countries: [Country!]!
+    "Name of the continent"
+    name: String!
+}
+
+"Coutries of the World"
+type Country {
+    "2-letter ISO 3166-1 alpha-2 code"
+    alpha2code: String!
+    "3-letter ISO 3166-1 alpha-3 code"
+    alpha3code: ID!
+    "Area of land boundary in sq.km."
+    area: Float
+    "Assignment status - Officially assigned or user assigned"
+    assignment: String
+    "Countries bordering this Country"
+    borders: [Country!]!
+    "IDD Calling codes"
+    callingCodes: [String]!
+    "Capital city/territory"
+    capital: [String!]!
+    "2-letter continent code"
+    continent: Continent!
+    "Geo Coordinates of this country"
+    coordinates: GeoCoordinates
+    "Currencies in use"
+    currencies: [Currency!]!
+    "Demonyms applicable to the citizens"
+    demonyms: [Demonym!]!
+    "FIFA country code"
+    fifacode: String
+    "URI to get the flag in SVG format. (Thanks to https://flagpedia.net)"
+    flagSVG: String
+    "Emoji symbol of flag"
+    flagmoji: String!
+    "Emoji symbol of flag with Unicode escape sequence"
+    flagmojiU: String!
+    "Root/Prefix code"
+    iddroot: String!
+    "Suffixes"
+    iddsuffixes: [String]!
+    "country is sovereign/independent"
+    independent: Boolean
+    "International Olympics Commitee country code"
+    ioccode: String
+    "If the country has no seas bordering"
+    landlocked: Boolean
+    "Spoken languages"
+    languages: [Language!]!
+    "Common name in English"
+    name: String!
+    "3-digit ISO 3166-1 numeric code"
+    num3code: Int
+    "Official name in English"
+    officialname: String!
+    "Region name"
+    region: Region!
+    "Subdivisions - state/province/territory/parish/emirate/dependency/county"
+    subdivisions: [Subdivision!]!
+    "Subregion name"
+    subregion: SubRegion!
+    "Timezone (abbreviations) applicable"
+    timezones: [Timezone!]!
+    "Country Code Top Level Domains (ccTLD) reserved - {@link https://en.wikipedia.org/wiki/Country_code_top-level_domain}"
+    tld: [String]!
+    "Common & official names in native & other languages"
+    translations: [CountryName!]!
+}
+
+"Country Name"
+type CountryName {
+    "Language"
+    language: Language
+    "Common name in Unicode script"
+    name: String!
+    "Common name in Unicode escape sequence"
+    nameU: String!
+    "Official name in Unicode script"
+    official: String!
+    "Official name in Unicode escape sequence"
+    officialU: String!
+}
+
+"Currencies of the World"
+type Currency {
+    "3 letter ISO 4217 code"
+    code: ID!
+    "Countries where this currency is used"
+    countries: [Country!]!
+    "Name of the currency"
+    name: String!
+    "Currency Symbol"
+    symbol: String
+    "Symbol in Unicode escape sequence"
+    symbolU: String
+}
+
+"Demonym"
+type Demonym {
+    "Female demonym"
+    female: String!
+    "Language"
+    language: Language!
+    "Male demonym"
+    male: String!
+}
+
+"Geo Coordinates"
+type GeoCoordinates {
+    "Geo Latitude"
+    latitude: Float
+    "Geo Longitude"
+    longitude: Float
+}
+
+"Languages of the World"
+type Language {
+    "2-letter ISO 693-1 code"
+    alpha2code: String
+    "3-letter ISO 693-3 or ISO 693-5 (for language families or macrolanguages)"
+    alpha3code: ID!
+    "Countries where this language is spoken"
+    countries: [Country!]!
+    "Name of the language"
+    name: String!
+}
+
+type Query {
+    "Query all Cities and filter them by name etc."
+    cities(filter: CityFilterInput): [City!]!
+    "Query a Continent by code"
+    continentByCode(code: ID!): Continent
+    "Query all Continents in the World and filter them by name"
+    continents(filter: ContinentFilterInput): [Continent!]!
+    "Query all Countries and filter them by code, name etc."
+    countries(filter: CountryFilterInput): [Country!]!
+    "Query a Country by ISO3166-1 Alpha-2 code"
+    countryByAlpha2Code(alpha2code: ID!): Country
+    "Query a Country by ISO3166-1 Alpha-3 code"
+    countryByAlpha3Code(alpha3code: ID!): Country
+    "Query a Country by FIFA code"
+    countryByFIFACode(fifacode: ID!): Country
+    "Query a Country by IOC code"
+    countryByIOCCode(ioccode: ID!): Country
+    "Query a Country by ISO3166-1 Numeric-3 code"
+    countryByNum3Code(num3code: Int!): Country
+    "Query all Currencies and filter them by name etc."
+    currencies(filter: CurrencyFilterInput): [Currency!]!
+    "Query a Currency by ISO 4217 Alpha-3 code"
+    currencyByCode(code: ID!): Currency
+    "Query a Language by ISO 693-1 Alpha-2 code"
+    languageByAlpha2Code(alpha2code: ID!): Language
+    "Query a Language by ISO 693-3 Alpha-3 code or ISO 693-5 Alpha-3 code for Macrolanguages"
+    languageByAlpha3Code(alpha3code: ID!): Language
+    "Query all Languages and filter them by name, code etc."
+    languages(filter: LanguageFilterInput): [Language!]!
+    "Query a Region by ID"
+    regionByName(name: String!): Region
+    "Query all Regions in the World and filter them by name"
+    regions(filter: RegionFilterInput): [Region!]!
+    "Query a Subdivision in a Country by code"
+    subdivisionByCode(code: ID!): Subdivision
+    "Query all Subdivisions in a Country and filter them by code, name etc."
+    subdivisions(filter: SubdivisionFilterInput): [Subdivision!]!
+    "Query a Timezone by abbreviation"
+    timezoneByAbbrev(abbrev: ID!): Timezone
+    "Query a Timezone by UTC Offset ID"
+    timezoneByUTCOffsetId(utcOffsetId: ID!): Timezone
+    "Query all Timezones and filter them by abbreviation, name, zone etc."
+    timezones(filter: TimezoneFilterInput): [Timezone!]!
+}
+
+"Regions of the World"
+type Region {
+    ID: ID!
+    "Name of the region"
+    name: String!
+    "Subregions of this region"
+    subregions: [SubRegion!]!
+}
+
+"Subregions in various regions"
+type SubRegion {
+    ID: ID!
+    "Countries in the Subregion"
+    countries: [Country!]!
+    "Name of the subregion within a region"
+    name: String!
+}
+
+"Subdivision of a country - state/province/territory/parish/emirate/dependency/county"
+type Subdivision {
+    "Cities in the subdivision"
+    cities: [City!]!
+    "ISO 3166-2 code of 2 letter + - + 2 letter subdivision code"
+    code: String!
+    "Geo Coordinates of the subdivision"
+    coordinates: GeoCoordinates!
+    "Country"
+    country: Country!
+    "Name of the subdivision"
+    name: String!
+    "Name of the subdivision in Unicode escape sequence"
+    nameU: String!
+}
+
+"Timezones of the World"
+type Timezone {
+    "3 - 6 letter timezone abbreviation e.g: EST"
+    abbrev: ID!
+    "Countries where this timezone is applicable"
+    countries: [Country!]!
+    "Timezone Name e.g. Eastern Standard Time"
+    name: String!
+    "Offset in seconds from UTC e.g: -18000"
+    utcOffset: Int!
+    "UTC Offset Identifier e.g: UTC-05:00"
+    utcOffsetId: String!
+    "Zone Name - e.g: America/New_York"
+    zone: String!
+}
+
+input CityFilterInput {
+    "2-letter ISO 3166-1 alpha-2 country code"
+    countryCode: StringQueryOperatorInput
+    "Name of the City"
+    name: StringQueryOperatorInput
+    "ISO 3166-2 code of 2 letter + - + 2 letter subdivision code"
+    subdivisionCode: StringQueryOperatorInput
+}
+
+input ContinentFilterInput {
+    "2-letter Continent code"
+    code: StringQueryOperatorInput
+    "Continent name"
+    name: StringQueryOperatorInput
+}
+
+input CountryFilterInput {
+    "2-letter ISO 3166-1 alpha-2 code"
+    alpha2code: StringQueryOperatorInput
+    "3-letter ISO 3166-1 alpha-3 code"
+    alpha3code: StringQueryOperatorInput
+    "IDD Calling codes"
+    callingCode: StringQueryOperatorInput
+    "2-letter continent code"
+    continentCode: StringQueryOperatorInput
+    "3 letter ISO 4217 code"
+    currencyCode: StringQueryOperatorInput
+    "FIFA country code"
+    fifacode: StringQueryOperatorInput
+    "International Olympics Commitee country code"
+    ioccode: StringQueryOperatorInput
+    "3-letter ISO 693-3 or ISO 693-5 (for language families or macrolanguages)"
+    languageCode: StringQueryOperatorInput
+    "Common name (English or other languages)"
+    name: StringQueryOperatorInput
+    "3-digit ISO 3166-1 numeric code"
+    num3code: StringQueryOperatorInput
+    "Official name (English or other languages)"
+    officialname: StringQueryOperatorInput
+    "Region name"
+    region: StringQueryOperatorInput
+    "Subregion name"
+    subregion: StringQueryOperatorInput
+    "Timezone (abbreviations) applicable"
+    timezoneAbbrev: StringQueryOperatorInput
+}
+
+input CurrencyFilterInput {
+    "3 letter ISO 4217 code"
+    code: StringQueryOperatorInput
+    "Name of the currency"
+    name: StringQueryOperatorInput
+    "Currency Symbol"
+    symbol: StringQueryOperatorInput
+}
+
+input LanguageFilterInput {
+    "2-letter ISO 693-1 code"
+    alpha2code: StringQueryOperatorInput
+    "3-letter ISO 693-3 or ISO 693-5 (for language families or macrolanguages)"
+    alpha3code: StringQueryOperatorInput
+    "Name of the language"
+    name: StringQueryOperatorInput
+}
+
+input RegionFilterInput {
+    "Region name"
+    name: StringQueryOperatorInput
+}
+
+input StringQueryOperatorInput {
+    "Equal to"
+    eq: String
+    "In the array of"
+    in: [String]
+    "Not equal to"
+    ne: String
+    "Not in the array of"
+    nin: [String]
+    "Regex pattern (or can be a search string)"
+    regex: String
+}
+
+input SubdivisionFilterInput {
+    "ISO 3166-2 code of 2 letter + - + 2 letter subdivision code"
+    code: StringQueryOperatorInput
+    "Country"
+    countryCode: StringQueryOperatorInput
+    "Name of the subdivision"
+    name: StringQueryOperatorInput
+}
+
+input TimezoneFilterInput {
+    "3 - 6 letter timezone abbreviation e.g: EST"
+    abbrev: StringQueryOperatorInput
+    "Timezone Name e.g. Eastern Standard Time"
+    name: StringQueryOperatorInput
+    "UTC Offset Identifier e.g: UTC-05:00"
+    utcOffsetId: StringQueryOperatorInput
+    "Zone Name - e.g: America/New_York"
+    zone: StringQueryOperatorInput
+}
